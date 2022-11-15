@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
 
-// ignore: use_key_in_widget_constructors
 class NewTransaction extends StatelessWidget {
   final amountController = TextEditingController();
   final titleController = TextEditingController();
+  final Function addTx;
+
+  NewTransaction({super.key, required this.addTx});
+
   @override
   Widget build(BuildContext context) {
     return Card(
@@ -19,7 +22,10 @@ class NewTransaction extends StatelessWidget {
               controller: amountController),
           TextButton(
             onPressed: () {
-              print(amountController.text);
+              addTx(
+                titleController.text,
+                double.parse(amountController.text),
+              );
             },
             child: const Text('Add Transaction'),
           ),
